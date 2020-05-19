@@ -47,9 +47,11 @@ function inputNumber(number) {
   } else if (justOperated) {
     calc[0] = number;
     justOperated = false;
+  } else if (calc[last] === '-0') {
+    calc[last] = '-' + number;
   } else {
     calc[last] = calc[last] + number;
-  };
+  }
   last = calc.length - 1;
   output.textContent = calc[last];
 };
@@ -62,6 +64,17 @@ function inputDecimal() {
     inputNumber('.');
   };
 };
+
+function makeNegative() {
+  let last = calc.length - 1;
+  if (calc.length % 2 === 1) {
+    calc[last] = calc[last] * -1;
+  } else if (calc.length % 2 === 0) {
+    calc.push('-0');
+    last = calc.length - 1;
+  };
+  output.textContent = calc[last];
+}
 
 function inputOperator(operator) {
   let last = calc.length - 1;
