@@ -1,5 +1,9 @@
 const calc = ['2', '+', '8', '/', '4', '-', '3', '*', '2', '+', '1']
 
+function inputNumber(a) {
+
+}
+
 function add(a, b) {
   return a + b;
 };
@@ -81,4 +85,15 @@ function findSolution() {
     };
   };
   return calculation;
+};
+
+function clear() {
+  calc.length = 0;
+};
+
+function addEventListeners() {
+  let button1 = document.getElementById('1');
+  let button2 = document.getElementById('2');
+
 }
+
