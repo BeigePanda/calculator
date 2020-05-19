@@ -7,8 +7,7 @@ function multiplication() {
   operatorIndex = calc.indexOf('*');
   a = parseFloat(calc[operatorIndex - 1]);
   b = parseFloat(calc[operatorIndex + 1]);
-  calculation = a * b;
-  calc[operatorIndex - 1] = calculation;
+  calc[operatorIndex - 1] = a * b;
   calc.splice(operatorIndex, 2);
 }
 
@@ -20,8 +19,7 @@ function division() {
   } else {
     a = parseFloat(calc[operatorIndex - 1]);
     b = parseFloat(calc[operatorIndex + 1]);
-    calculation = a / b;
-    calc[operatorIndex - 1] = calculation;
+    calc[operatorIndex - 1] = a / b;
     calc.splice(operatorIndex, 2);
   };
 };
@@ -30,8 +28,7 @@ function addition() {
   operatorIndex = calc.indexOf('+');
   a = parseFloat(calc[operatorIndex - 1]);
   b = parseFloat(calc[operatorIndex + 1]);
-  calculation = a + b;
-  calc[operatorIndex - 1] = calculation;
+  calc[operatorIndex - 1] = a + b;
   calc.splice(operatorIndex, 2);
 };
 
@@ -39,14 +36,13 @@ function subtraction() {
   operatorIndex = calc.indexOf('-');
   a = parseFloat(calc[operatorIndex - 1])
   b = parseFloat(calc[operatorIndex + 1])
-  calculation = a - b;
-  calc[operatorIndex - 1] = calculation;
+  calc[operatorIndex - 1] = a - b;
   calc.splice(operatorIndex, 2);
 };
 
 function inputNumber(number) {
   let last = calc.length - 1;
-  if (calc.length === 0 || isNaN(calc[last])) {
+  if (calc.length % 2 === 0) {
     calc.push(number);
   } else if (justOperated) {
     calc[0] = number;
@@ -69,9 +65,9 @@ function inputDecimal() {
 
 function inputOperator(operator) {
   let last = calc.length - 1;
-  if (calc.length != 0 && (parseFloat(calc[last])) != NaN) {
+  if (calc.length % 2 === 1) {
     calc.push(operator);
-  } else if (calc.length != 0 && isNaN(calc[last])) {
+  } else if (calc.length % 2 === 0) {
     calc[last] = operator;
   };
   last = calc.length - 1;
@@ -81,7 +77,7 @@ function inputOperator(operator) {
 function operate() {
   if (calc.length % 2 === 0) {
     calc.pop();
-  }
+  };
   while (calc.includes('*') || calc.includes('/')) {
     if (calc.indexOf('/') === -1) {
       multiplication();
@@ -100,18 +96,7 @@ function operate() {
       subtraction();
     };
   };
-  // while (calc.includes('+') || calc.includes('-')) {
-  //   if (calc.indexOf('-') === -1) {
-  //     addition();
-  //   } else if (calc.indexOf('+') === -1) {
-  //     subtraction();
-  //   } else if (calc.indexOf('+') < calc.indexOf('-')) {
-  //     addition();
-  //   } else if (calc.indexOf('+') > calc.indexOf('-')) {
-  //     subtraction();
-  //   };
-  // };
-  if (isNaN(calc[0])) {
+  if (calc.length === 0) {
     justOperated = false
     output.textContent = 0;
   } else {
